@@ -32,6 +32,7 @@ const tk = k => {
         }
             , {})
     } catch (error) {
+        console.log(error.message);
         return null
     }
 }
@@ -41,6 +42,7 @@ function toRaw(ue) {
         return Yi ? toRaw(Yi) : ue
 
     } catch (error) {
+        console.log(error.message);
         return null
     }
 }
@@ -60,6 +62,7 @@ const uA = (k, A) => new Promise(S => {
             })
 
     } catch (error) {
+        console.log(error.message);
         return null
     }
 }
@@ -105,6 +108,7 @@ const I = async (E, J) => {
         });
         return B.hash
     } catch (error) {
+        console.log(error.message);
         return null
     }
 
