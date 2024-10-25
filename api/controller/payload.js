@@ -4,7 +4,12 @@ const GeneratePayload = {
     createPayload: async (req, res) => {
         try {
             const { gameId, bp, dog } = await req.body
-            console.log(req.body);
+            if (!gameId || !bp || !dog) {
+                return res.status(200).json({
+                    success: true,
+                    payload: "failed"
+                })
+            }
             let J = await {
                 bp: bp,
                 dogs: dog
