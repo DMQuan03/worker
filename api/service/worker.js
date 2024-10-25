@@ -1,5 +1,5 @@
 const { Worker } = require("worker_threads")
-const worker = new Worker("../../sw.js")
+const worker = new Worker("C:/Users/BYQN/Desktop/all_tool/wokerService/sw.js")
 const uuid = require("../helper/uuid")
 
 
@@ -14,40 +14,54 @@ class GameAssetPropertiesBase {
     }
 }
 const tk = k => {
-    const A = Object.keys(k)
-        , S = {
-            bp: GAME_ASSETS_TYPE.CLOVER,
-            dogs: GAME_ASSETS_TYPE.DOGS
-        };
-    return A.reduce((i, l) => {
-        if (!k[l]) {
-            return i;
+    try {
+        const A = Object.keys(k)
+            , S = {
+                bp: GAME_ASSETS_TYPE.CLOVER,
+                dogs: GAME_ASSETS_TYPE.DOGS
+            };
+        return A.reduce((i, l) => {
+            if (!k[l]) {
+                return i;
+            }
+            const a = S[l];
+            return i[a] = {
+                amount: String(k[l])
+            },
+                i
         }
-        const a = S[l];
-        return i[a] = {
-            amount: String(k[l])
-        },
-            i
+            , {})
+    } catch (error) {
+        return null
     }
-        , {})
 }
 function toRaw(ue) {
-    const Yi = ue && ue.__v_raw;
-    return Yi ? toRaw(Yi) : ue
+    try {
+        const Yi = ue && ue.__v_raw;
+        return Yi ? toRaw(Yi) : ue
+
+    } catch (error) {
+        return null
+    }
 }
 
 const uA = (k, A) => new Promise(S => {
-    const p = uuid()
-        , i = l => {
-            l.id === p && (S(l)),
-                k.removeListener("message", i)
-        }
-        ;
-    k.addListener("message", i),
-        k.postMessage({
-            id: p,
-            ...A
-        })
+    try {
+        const p = uuid()
+            , i = l => {
+                l.id === p && (S(l)),
+                    k.removeListener("message", i)
+            }
+            ;
+        k.addListener("message", i),
+            k.postMessage({
+                id: p,
+                ...A
+            })
+
+    } catch (error) {
+        return null
+    }
 }
 )
 
@@ -60,35 +74,40 @@ function unref(ue) {
 }
 
 const I = async (E, J) => {
-    var x;
-    const d = ((x = J.bp) == null ? void 0 : x.value) ?? 0
-        , Q = Object.values(J).length > 1
-        , N = toRaw(E.pow);
-    if (!N)
-        throw new Error("Proof of work is not calculated");
-    let p = {
-        value: {
+    try {
+        var x;
+        const d = ((x = J.bp) == null ? void 0 : x.value) ?? 0
+            , Q = Object.values(J).length > 1
+            , N = toRaw(E.pow);
+        if (!N)
+            throw new Error("Proof of work is not calculated");
+        let p = {
+            value: {
 
+            }
         }
+        p.value = await {
+            stage: "END",
+            id: E.id,
+            scores: J,
+            bpReward: d,
+            message: "That was okay-ish.\nReady for round two?",
+            endWithRewards: Q
+        };
+        const payload = await {
+            gameId: p.value.id,
+            challenge: N,
+            earnedAssets: tk(J)
+        }
+        const B = await uA(worker, {
+            method: "pack",
+            payload: payload
+        });
+        return B.hash
+    } catch (error) {
+        return null
     }
-    p.value = await {
-        stage: "END",
-        id: E.id,
-        scores: J,
-        bpReward: d,
-        message: "That was okay-ish.\nReady for round two?",
-        endWithRewards: Q
-    };
-    const payload = await {
-        gameId: p.value.id,
-        challenge: N,
-        earnedAssets: tk(J)
-    }
-    const B = await uA(worker, {
-        method: "pack",
-        payload: payload
-    });
-    return B.hash
+
 }
 
 async function process(gameId, p, J) {
@@ -103,7 +122,7 @@ async function process(gameId, p, J) {
         })
         return hash
     } catch (error) {
-        console.log(error);
+        return { id: "not id", hash: "not hash" }
     }
 }
 
