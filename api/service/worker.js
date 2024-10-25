@@ -14,57 +14,41 @@ class GameAssetPropertiesBase {
     }
 }
 const tk = k => {
-    try {
-        const A = Object.keys(k)
-            , S = {
-                bp: GAME_ASSETS_TYPE.CLOVER,
-                dogs: GAME_ASSETS_TYPE.DOGS
-            };
-        return A.reduce((i, l) => {
-            if (!k[l]) {
-                return i;
-            }
-            const a = S[l];
-            return i[a] = {
-                amount: String(k[l])
-            },
-                i
+    const A = Object.keys(k)
+        , S = {
+            bp: GAME_ASSETS_TYPE.CLOVER,
+            dogs: GAME_ASSETS_TYPE.DOGS
+        };
+    return A.reduce((i, l) => {
+        if (!k[l]) {
+            return i;
         }
-            , {})
-    } catch (error) {
-        console.log(error.message);
-        return null
+        const a = S[l];
+        return i[a] = {
+            amount: String(k[l])
+        },
+            i
     }
+        , {})
 }
 function toRaw(ue) {
-    try {
-        const Yi = ue && ue.__v_raw;
-        return Yi ? toRaw(Yi) : ue
-
-    } catch (error) {
-        console.log(error.message);
-        return null
-    }
+    const Yi = ue && ue.__v_raw;
+    return Yi ? toRaw(Yi) : ue
 }
 
 const uA = (k, A) => new Promise(S => {
-    try {
-        const p = uuid()
-            , i = l => {
-                l.id === p && (S(l)),
-                    k.removeListener("message", i)
-            }
-            ;
-        k.addListener("message", i),
-            k.postMessage({
-                id: p,
-                ...A
-            })
+    const p = uuid()
+        , i = l => {
+            l.id === p && (S(l)),
+                k.removeListener("message", i)
+        }
+        ;
+    k.addListener("message", i),
+        k.postMessage({
+            id: p,
+            ...A
+        })
 
-    } catch (error) {
-        console.log(error.message);
-        return null
-    }
 }
 )
 
@@ -77,40 +61,35 @@ function unref(ue) {
 }
 
 const I = async (E, J) => {
-    try {
-        var x;
-        const d = ((x = J.bp) == null ? void 0 : x.value) ?? 0
-            , Q = Object.values(J).length > 1
-            , N = toRaw(E.pow);
-        if (!N)
-            throw new Error("Proof of work is not calculated");
-        let p = {
-            value: {
+    var x;
+    const d = ((x = J.bp) == null ? void 0 : x.value) ?? 0
+        , Q = Object.values(J).length > 1
+        , N = toRaw(E.pow);
+    if (!N)
+        throw new Error("Proof of work is not calculated");
+    let p = {
+        value: {
 
-            }
         }
-        p.value = await {
-            stage: "END",
-            id: E.id,
-            scores: J,
-            bpReward: d,
-            message: "That was okay-ish.\nReady for round two?",
-            endWithRewards: Q
-        };
-        const payload = await {
-            gameId: p.value.id,
-            challenge: N,
-            earnedAssets: tk(J)
-        }
-        const B = await uA(worker, {
-            method: "pack",
-            payload: payload
-        });
-        return B.hash
-    } catch (error) {
-        console.log(error.message);
-        return null
     }
+    p.value = await {
+        stage: "END",
+        id: E.id,
+        scores: J,
+        bpReward: d,
+        message: "That was okay-ish.\nReady for round two?",
+        endWithRewards: Q
+    };
+    const payload = await {
+        gameId: p.value.id,
+        challenge: N,
+        earnedAssets: tk(J)
+    }
+    const B = await uA(worker, {
+        method: "pack",
+        payload: payload
+    });
+    return B.hash
 
 }
 

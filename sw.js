@@ -557,10 +557,7 @@ ${e.stack}` : r
     async function R(e) {
         if (_ !== void 0)
             return _;
-        // typeof e < "u" && Object.getPrototypeOf(e) === Object.prototype ? { module_or_path: e } = e : console.warn("using deprecated parameters for the initialization function; pass a single object instead"),
-        //     typeof e > "u" && (e = new URL("" + new URL("file.wasm", self.location.href).href, self.location.href));
         const n = $();
-        // (typeof e == "string" || typeof Request == "function" && e instanceof Request || typeof URL == "function" && e instanceof URL) && (e = fetch(e));
         e = await fetch("https://telegram.blum.codes/_dist/game_wasm_bg-BnV071fP.wasm")
         const { instance: t, module: r } = await D(await e, n);
         return L(t, r)
