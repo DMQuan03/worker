@@ -571,7 +571,7 @@ ${e.stack}` : r
             await x
     }
         ;
-    parentPort.onmessage = async e => {
+    self.onmessage = async e => {
         await V();
         const { id: n, method: t, payload: r } = e.data;
         switch (t) {
