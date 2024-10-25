@@ -18,7 +18,10 @@ const GeneratePayload = {
                     gameOptions: {}
                 }
             }
+            console.log(J);
+            console.log(p);
             const hash = await ws(gameId, p, J)
+            console.log(hash)
             return res.status(200).json({
                 success: true,
                 payload: hash
