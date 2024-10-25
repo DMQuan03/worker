@@ -1,5 +1,5 @@
 const { Worker } = require("worker_threads")
-const worker = new Worker("C:/Users/BYQN/Desktop/all_tool/wokerService/sw.js")
+const worker = new Worker("./sw.js")
 const uuid = require("../helper/uuid")
 
 
