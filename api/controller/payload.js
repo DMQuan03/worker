@@ -10,12 +10,9 @@ const GeneratePayload = {
                     payload: "failed"
                 })
             }
-            if (!dog) {
-                dog = 0
-            }
             let J = await {
                 bp: bp,
-                dogs: dog
+                dogs: dog ? dog : 0
             }
             let p = await {
                 value: {
