@@ -4,6 +4,7 @@ const GeneratePayload = {
     createPayload: async (req, res) => {
         try {
             const { gameId, bp, dog } = await req.body
+            console.log(req.body);
             let J = await {
                 bp: bp,
                 dogs: dog
